@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+
+.env
+.venv/
+venv/
+
+vectorstore/
+data/documents/
+
+.DS_Store
