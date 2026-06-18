@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from load_documents import load_pdf_documents
 
 load_dotenv()
@@ -27,11 +27,13 @@ def create_vectorstore():
 
     print(f"split documents into {len(chunks)} chunks")
 
-    emdeddings =  OpenAIEmbeddings()
+    embeddings = HuggingFaceEmbeddings(
+        model_name = "sentence-transformers/all-MiniLM-L6-v2"
+    )
 
     vectorstore = Chroma.from_documents(
         documents = chunks,
-        embedding = emdeddings,
+        embedding = embeddings,
         persist_directory= VECTORSTORE_DIR
     )
 
