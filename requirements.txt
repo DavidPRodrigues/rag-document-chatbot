@@ -8,4 +8,5 @@ python-dotenv
 streamlit
 tiktoken
 sentence-transformers
+langchain-ollama
 
