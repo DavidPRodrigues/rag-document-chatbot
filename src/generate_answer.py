@@ -1,31 +1,21 @@
-from langchain_ollama import OllamaLLM
-from query_rag import search_documents
+from langchain_groq import ChatGroq
 
-def generate_answer(question: str, k: int = 3):
-    docs = search_documents(question, k=k)
 
-    context = "\n\n".join([doc.page_content for doc in docs])
+def generate_answer(question, docs):
+    context = "\n\n".join(doc.page_content for doc in docs)
 
-    prompt = f"""
- you are a helpful assistant. Answer the question using only the context below.
- If the asnwer is not in the context, say: "I could not find this information in the document."
+    prompt = f"""You are a helpful assistant. Answer the question using only the context below.
+If the answer is not in the context, say: "I could not find this information in the document."
 
- context:
- {context}
+Context:
+{context}
 
- Question:
- {question}
+Question:
+{question}
 
- Answer:
- """
-    llm = OllamaLLM(model="llama3.2")
-    answer = llm.invoke(prompt)
+Answer:"""
 
-    return answer, docs
+    llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
+    response = llm.invoke(prompt)
 
-if __name__ == '__main__':
-    question = input("ask a question:")
-    answer, docs = generate_answer(question)
-
-    print("\nAnswer:\n")
-    print(answer)
+    return response.content

@@ -1,9 +1,6 @@
 .env
+**/secrets.toml
 __pycache__/
 *.pyc
-
-data/documents/
 vectorstore/
-
-.venv/
-venv/
+data/documents/
