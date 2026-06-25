@@ -1,12 +1,9 @@
+streamlit
 langchain
 langchain-community
-langchain-openai
 langchain-text-splitters
+langchain-groq
 chromadb
-pypdf
-python-dotenv
-streamlit
-tiktoken
+pysqlite3-binary; platform_system == "Linux"
 sentence-transformers
-langchain-ollama
-
+pypdf
